@@ -1,0 +1,3 @@
+CREATE TABLE recordings (last_update NUMERIC, play_position NUMERIC, season NUMERIC, episode NUMERIC, channel TEXT, length NUMERIC, start NUMERIC, status TEXT, title TEXT, uri TEXT, format TEXT, summary TEXT, description TEXT, icon TEXT, quality TEXT);
+CREATE TRIGGER update_last_update after update on recordings for each row begin update recordings set last_update = strftime('%s', 'now') where uri = NEW.uri; end;
+CREATE TRIGGER insert_last_update after insert on recordings for each row begin update recordings set last_update = strftime('%s', 'now') where uri = NEW.uri; end;
